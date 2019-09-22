@@ -1,0 +1,44 @@
+version: '3.5'
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    volumes:
+        - ./nginx/config/site.conf:/etc/nginx/conf.d/default.conf
+        # - ./nginx/.certs:/etc/nginx/ssl
+    ports:
+        - 80:80
+        # - 443:443
+    networks:
+      - gonet
+    links:
+        - build-linechatbot
+        - run-linechatbot
+    restart: always
+  
+  build-linechatbot:
+    container_name: build-linechatbot
+    build:
+      context: ./linechatbot
+      dockerfile: .Dockerfile
+    volumes:
+        - ./linechatbot/app:/linechatbot/app
+    networks:
+      - gonet
+    restart: always
+
+  run-linechatbot:
+    container_name: run-linechatbot
+    build: ./linechatbot
+    volumes:
+      - ./linechatbot:/go/src/linechatbot
+    working_dir: /go/src/linechatbot/app
+    networks:
+      - gonet
+    command: "sh docker-entrypoint.sh"
+    restart: always
+
+networks:
+  gonet:
