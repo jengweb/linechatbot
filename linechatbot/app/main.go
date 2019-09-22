@@ -8,8 +8,8 @@ import (
 )
 func main() {
 	bot, err := linebot.New(
-		"584c8dc1777c8a85762c2cfc429fff01",
-		"CZObiwkh2GJNt2zq/dlIM0oqaY45BfIWbe+XFS5KGQy6gNrZ1qti2IGUKj7kDa5Rubjqt2fZ9d9U25a/WLCySfvK52bOOnKKkEGHk6qncFeoQulYcAjb+fqqdt1L/Ba8hSTjCvTH3K+tcvG9TiW9zAdB04t89/1O/w1cDnyilFU=",
+		"CHANNEL_SECRET",
+		"CHANNEL_TOKEN",
 	)
 	if err != nil {
 		log.Fatal(err)
